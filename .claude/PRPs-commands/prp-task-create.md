@@ -27,7 +27,7 @@ Generate a comprehensive task list for focused changes with validation.
 ## PRP Generation
 
 **READ**
-Using TASK_PRP/PRPs/prp_task.md format:
+Using PRPs/prp_task.md format:
 
 ### Context Section
 

@@ -26,7 +26,7 @@ Generate a comprehensive specification-driven PRP with clear transformation goal
 
 ## PRP Generation
 
-Using /PRPs/templates/prp_spec.md:
+Using /PRPs/prp_spec.md:
 
 ### State Documentation
 
