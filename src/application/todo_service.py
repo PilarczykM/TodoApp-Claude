@@ -81,7 +81,7 @@ class TodoService:
         filtered_todos = [todo for todo in all_todos if todo.priority == priority]
         return TodoListDto.from_todos(filtered_todos)
 
-    def get_statistics(self) -> dict:
+    def get_statistics(self) -> dict[str, int | dict[str, int]]:
         """Get statistics about todos."""
         all_todos = self._repository.find_all()
 

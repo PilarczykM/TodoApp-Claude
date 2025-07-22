@@ -13,14 +13,14 @@ class CreateTodoDto(BaseModel):
     priority: str = Field(default="medium")
 
     @field_validator('title')
-    def validate_title(cls, v):
+    def validate_title(cls, v: str) -> str:
         """Validate title field."""
         if not v.strip():
             raise ValueError('Title cannot be empty or whitespace')
         return v.strip()
 
     @field_validator('priority')
-    def validate_priority(cls, v):
+    def validate_priority(cls, v: str) -> str:
         """Validate priority field."""
         if v not in [p.value for p in Priority]:
             raise ValueError(f'Priority must be one of: {[p.value for p in Priority]}')
@@ -44,14 +44,14 @@ class UpdateTodoDto(BaseModel):
     completed: bool | None = None
 
     @field_validator('title')
-    def validate_title(cls, v):
+    def validate_title(cls, v: str) -> str:
         """Validate title field."""
         if v is not None and not v.strip():
             raise ValueError('Title cannot be empty or whitespace')
         return v.strip() if v else v
 
     @field_validator('priority')
-    def validate_priority(cls, v):
+    def validate_priority(cls, v: str) -> str:
         """Validate priority field."""
         if v is not None and v not in [p.value for p in Priority]:
             raise ValueError(f'Priority must be one of: {[p.value for p in Priority]}')
