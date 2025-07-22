@@ -1,3 +1,4 @@
+import os
 
 from src.application.dto import TodoListDto, TodoResponseDto
 
@@ -127,8 +128,6 @@ class ConsoleUtils:
     @staticmethod
     def clear_screen() -> None:
         """Clear the console screen."""
-        import os
-
         os.system("cls" if os.name == "nt" else "clear")
 
     @staticmethod

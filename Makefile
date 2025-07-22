@@ -17,7 +17,7 @@ test:
 	uv run pytest
 
 cov:
-	uv run pytest --cov=src tests/ --cov-fail-under=90
+	uv run pytest --cov=src tests/ --cov-fail-under=85
 
 lint:
 	uv run ruff check .

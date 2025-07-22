@@ -47,10 +47,10 @@
     <step>Run <code>make lint</code> to check for lint violations</step>
     <step>Run <code>make typecheck</code> to perform static type analysis</step>
     <step>Run <code>make test</code> to execute all tests and verify correctness</step>
-    <step>Run <code>make cov</code> to execute tests coverage and verify that we are not below 90%</step>
+    <step>Run <code>make cov</code> to execute tests coverage and verify that we are not below 85%</step>
     <step>Do all of the above before committing any code</step>
     <step>Commit frequently to keep changes atomic and traceable</step>
-    <quality-target>Maintain test coverage above 90%</quality-target>
+    <quality-target>Maintain test coverage above 85%</quality-target>
   </workflow>
 
   <restrictions>

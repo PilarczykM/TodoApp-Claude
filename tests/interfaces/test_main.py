@@ -2,6 +2,7 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
+from src.domain import RepositoryError
 from src.interfaces.main import create_app_components, main
 
 
@@ -47,3 +48,21 @@ class TestMain:
 
             mock_display_error.assert_called_with("Failed to initialize application: Test error")
             mock_exit.assert_called_with(1)
+
+    @patch("src.interfaces.console_interface.ConsoleInterface.run", side_effect=Exception("Unexpected error"))
+    @patch("src.interfaces.format_selector.FormatSelector.select_storage_format", return_value="json")
+    @patch("src.interfaces.console_utils.ConsoleUtils.display_error")
+    @patch("sys.exit")
+    def test_main_function_unexpected_error(self, mock_exit, mock_display_error, mock_format_select, mock_run):
+        main()
+        mock_display_error.assert_called_with("Unexpected error: Unexpected error")
+        mock_exit.assert_called_with(1)
+
+    @patch("src.interfaces.console_interface.ConsoleInterface.run", side_effect=RepositoryError("Repository error"))
+    @patch("src.interfaces.format_selector.FormatSelector.select_storage_format", return_value="json")
+    @patch("src.interfaces.console_utils.ConsoleUtils.display_error")
+    @patch("sys.exit")
+    def test_main_function_repository_error(self, mock_exit, mock_display_error, mock_format_select, mock_run):
+        main()
+        mock_display_error.assert_called_with("Data access error: Repository error")
+        mock_exit.assert_called_with(1)

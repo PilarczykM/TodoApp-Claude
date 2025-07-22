@@ -4,7 +4,6 @@ from pathlib import Path
 from src.application import AppConfig, TodoService
 from src.domain import RepositoryError
 from src.infrastructure import RepositoryFactory
-
 from src.interfaces.console_interface import ConsoleInterface
 from src.interfaces.console_utils import ConsoleUtils
 from src.interfaces.format_selector import FormatSelector

@@ -32,3 +32,14 @@ class TestFormatSelector:
         assert "JSON" in result
         assert "XML" in result
         assert "Storage Format Information:" in result
+
+    def test_select_format_with_exception_handling(self):
+        # Test the error handling path in select_storage_format
+        with patch(
+            "src.interfaces.console_utils.ConsoleUtils.get_menu_choice", side_effect=[Exception("Test error"), 1]
+        ):
+            with patch("src.interfaces.console_utils.ConsoleUtils.display_error") as mock_error:
+                with patch("sys.stdout", StringIO()):  # Suppress output
+                    result = FormatSelector.select_storage_format()
+                    assert result == "json"
+                    mock_error.assert_called_with("Invalid selection: Test error")

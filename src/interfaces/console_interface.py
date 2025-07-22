@@ -1,7 +1,5 @@
-
 from src.application import CreateTodoDto, TodoService, UpdateTodoDto
 from src.domain import Priority, RepositoryError, TodoNotFoundError, TodoValidationError
-
 from src.interfaces.console_utils import ConsoleUtils
 
 
