@@ -1,6 +1,7 @@
 """Domain layer - Core business entities and rules."""
 
 from src.domain.exceptions import (
+    RepositoryError,
     TodoDomainError,
     TodoNotFoundError,
     TodoValidationError,
@@ -11,6 +12,7 @@ from src.domain.todo import Todo
 
 __all__ = [
     "Priority",
+    "RepositoryError",
     "Todo",
     "TodoDomainError",
     "TodoNotFoundError",

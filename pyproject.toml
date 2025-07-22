@@ -8,6 +8,9 @@ dependencies = [
     "pydantic>=2.0.0",
 ]
 
+[project.scripts]
+todo-app = "src.todo_app:main"
+
 [dependency-groups]
 dev = [
     "mypy>=1.17.0",
@@ -52,6 +55,7 @@ ignore = [
     "D104", # Missing docstring in public package
     "D107", # Missing docstring in __init__
     "TRY003", # Avoid specifying long messages outside the exception class
+    "TRY300",
 ]
 
 [tool.ruff.lint.flake8-tidy-imports]

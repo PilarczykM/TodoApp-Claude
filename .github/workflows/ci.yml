@@ -29,3 +29,6 @@ jobs:
     - name: Run tests
       if: success()
       run: uv run pytest
+    - name: Run tests coverage
+      if: success()
+      run: uv run pytest --cov=src tests/ --cov-fail-under=90
