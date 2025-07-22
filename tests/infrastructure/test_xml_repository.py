@@ -149,7 +149,7 @@ class TestXmlTodoRepository:
             todo = Todo(title="Test Task")
 
             # Mock _save_xml_root to raise exception
-            with unittest.mock.patch.object(repo, '_save_xml_root', side_effect=Exception("Save error")):
+            with unittest.mock.patch.object(repo, "_save_xml_root", side_effect=Exception("Save error")):
                 with pytest.raises(RepositoryError, match="Failed to save todo"):
                     repo.save(todo)
 
@@ -159,7 +159,7 @@ class TestXmlTodoRepository:
             repo = XmlTodoRepository(Path(temp_dir) / "todos.xml")
 
             # Mock _load_xml_root to raise exception
-            with unittest.mock.patch.object(repo, '_load_xml_root', side_effect=Exception("Load error")):
+            with unittest.mock.patch.object(repo, "_load_xml_root", side_effect=Exception("Load error")):
                 with pytest.raises(RepositoryError, match="Failed to find todo"):
                     repo.find_by_id("test-id")
 
@@ -169,7 +169,7 @@ class TestXmlTodoRepository:
             repo = XmlTodoRepository(Path(temp_dir) / "todos.xml")
 
             # Mock _load_xml_root to raise exception
-            with unittest.mock.patch.object(repo, '_load_xml_root', side_effect=Exception("Load error")):
+            with unittest.mock.patch.object(repo, "_load_xml_root", side_effect=Exception("Load error")):
                 with pytest.raises(RepositoryError, match="Failed to load todos"):
                     repo.find_all()
 
@@ -187,7 +187,7 @@ class TestXmlTodoRepository:
             repo = XmlTodoRepository(Path(temp_dir) / "todos.xml")
 
             # Mock _load_xml_root to raise exception
-            with unittest.mock.patch.object(repo, '_load_xml_root', side_effect=Exception("Load error")):
+            with unittest.mock.patch.object(repo, "_load_xml_root", side_effect=Exception("Load error")):
                 with pytest.raises(RepositoryError, match="Failed to delete todo"):
                     repo.delete("test-id")
 
@@ -204,7 +204,7 @@ class TestXmlTodoRepository:
         """Test loading from file with invalid XML."""
         with tempfile.TemporaryDirectory() as temp_dir:
             file_path = Path(temp_dir) / "invalid.xml"
-            file_path.write_text("not valid xml", encoding='utf-8')
+            file_path.write_text("not valid xml", encoding="utf-8")
 
             repo = XmlTodoRepository(file_path)
             with pytest.raises(RepositoryError, match="Invalid XML format"):
@@ -217,8 +217,9 @@ class TestXmlTodoRepository:
             root = ET.Element("todos")
 
             # Mock FileHandler.safe_write to raise exception
-            with unittest.mock.patch('src.infrastructure.xml_repository.FileHandler.safe_write',
-                                   side_effect=Exception("Write error")):
+            with unittest.mock.patch(
+                "src.infrastructure.xml_repository.FileHandler.safe_write", side_effect=Exception("Write error")
+            ):
                 with pytest.raises(RepositoryError, match="Failed to write XML file"):
                     repo._save_xml_root(root)
 

@@ -1,4 +1,3 @@
-
 import pytest
 
 from src.domain.exceptions import TodoValidationError
@@ -8,11 +7,7 @@ from src.domain.todo import Todo
 
 class TestTodo:
     def test_todo_creation(self):
-        todo = Todo(
-            title="Test task",
-            description="Test description",
-            priority=Priority.HIGH
-        )
+        todo = Todo(title="Test task", description="Test description", priority=Priority.HIGH)
         assert todo.title == "Test task"
         assert todo.description == "Test description"
         assert todo.priority == Priority.HIGH
