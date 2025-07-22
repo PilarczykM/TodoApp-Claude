@@ -67,10 +67,7 @@ def test_delete_todo(todo_service, mock_repository):
 
 
 def test_get_all_todos(todo_service, mock_repository):
-    todos = [
-        Todo(title="Task 1"),
-        Todo(title="Task 2", completed=True)
-    ]
+    todos = [Todo(title="Task 1"), Todo(title="Task 2", completed=True)]
     mock_repository.find_all.return_value = todos
 
     result = todo_service.get_all_todos()
@@ -103,7 +100,7 @@ def test_get_todos_by_status(todo_service, mock_repository):
     todos = [
         Todo(title="Task 1", completed=False),
         Todo(title="Task 2", completed=True),
-        Todo(title="Task 3", completed=False)
+        Todo(title="Task 3", completed=False),
     ]
     mock_repository.find_all.return_value = todos
 
@@ -119,7 +116,7 @@ def test_get_todos_by_priority(todo_service, mock_repository):
     todos = [
         Todo(title="Task 1", priority=Priority.HIGH),
         Todo(title="Task 2", priority=Priority.MEDIUM),
-        Todo(title="Task 3", priority=Priority.HIGH)
+        Todo(title="Task 3", priority=Priority.HIGH),
     ]
     mock_repository.find_all.return_value = todos
 
@@ -136,7 +133,7 @@ def test_get_statistics(todo_service, mock_repository):
         Todo(title="Task 1", priority=Priority.HIGH, completed=True),
         Todo(title="Task 2", priority=Priority.MEDIUM, completed=False),
         Todo(title="Task 3", priority=Priority.HIGH, completed=False),
-        Todo(title="Task 4", priority=Priority.LOW, completed=True)
+        Todo(title="Task 4", priority=Priority.LOW, completed=True),
     ]
     mock_repository.find_all.return_value = todos
 

@@ -6,11 +6,7 @@ from src.domain import Priority, Todo
 
 
 def test_create_todo_dto():
-    dto = CreateTodoDto(
-        title="Test Task",
-        description="Test description",
-        priority="high"
-    )
+    dto = CreateTodoDto(title="Test Task", description="Test description", priority="high")
     assert dto.title == "Test Task"
     assert dto.description == "Test description"
     assert dto.priority == "high"
@@ -25,12 +21,7 @@ def test_create_todo_dto_validation():
 
 
 def test_update_todo_dto():
-    dto = UpdateTodoDto(
-        title="Updated Task",
-        description="Updated description",
-        priority="low",
-        completed=True
-    )
+    dto = UpdateTodoDto(title="Updated Task", description="Updated description", priority="low", completed=True)
     assert dto.title == "Updated Task"
     assert dto.completed is True
 
@@ -53,11 +44,7 @@ def test_create_todo_dto_defaults():
 
 
 def test_create_todo_dto_to_domain():
-    dto = CreateTodoDto(
-        title="Test Task",
-        description="Test description",
-        priority="low"
-    )
+    dto = CreateTodoDto(title="Test Task", description="Test description", priority="low")
     todo = dto.to_domain()
 
     assert todo.title == "Test Task"
@@ -83,7 +70,7 @@ def test_todo_list_dto_from_todos():
     todos = [
         Todo(title="Task 1", completed=False),
         Todo(title="Task 2", completed=True),
-        Todo(title="Task 3", completed=False)
+        Todo(title="Task 3", completed=False),
     ]
 
     dto = TodoListDto.from_todos(todos)

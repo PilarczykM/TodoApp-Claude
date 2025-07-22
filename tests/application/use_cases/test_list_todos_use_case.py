@@ -9,7 +9,7 @@ def test_list_todos_use_case_with_todos():
     todos = [
         Todo(title="Task 1", completed=False),
         Todo(title="Task 2", completed=True),
-        Todo(title="Task 3", completed=False)
+        Todo(title="Task 3", completed=False),
     ]
     mock_repository.find_all.return_value = todos
 

@@ -13,12 +13,7 @@ def test_update_todo_use_case_success():
     mock_repository.find_by_id.return_value = todo
 
     use_case = UpdateTodoUseCase(mock_repository)
-    update_dto = UpdateTodoDto(
-        title="Updated Task",
-        description="Updated description",
-        priority="high",
-        completed=True
-    )
+    update_dto = UpdateTodoDto(title="Updated Task", description="Updated description", priority="high", completed=True)
 
     result = use_case.execute(todo.id, update_dto)
 

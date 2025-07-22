@@ -12,27 +12,23 @@ class CreateTodoDto(BaseModel):
     description: str | None = Field(None, max_length=1000)
     priority: str = Field(default="medium")
 
-    @field_validator('title')
+    @field_validator("title")
     def validate_title(cls, v: str) -> str:
         """Validate title field."""
         if not v.strip():
-            raise ValueError('Title cannot be empty or whitespace')
+            raise ValueError("Title cannot be empty or whitespace")
         return v.strip()
 
-    @field_validator('priority')
+    @field_validator("priority")
     def validate_priority(cls, v: str) -> str:
         """Validate priority field."""
         if v not in [p.value for p in Priority]:
-            raise ValueError(f'Priority must be one of: {[p.value for p in Priority]}')
+            raise ValueError(f"Priority must be one of: {[p.value for p in Priority]}")
         return v
 
     def to_domain(self) -> Todo:
         """Convert DTO to domain entity."""
-        return Todo(
-            title=self.title,
-            description=self.description,
-            priority=Priority(self.priority)
-        )
+        return Todo(title=self.title, description=self.description, priority=Priority(self.priority))
 
 
 class UpdateTodoDto(BaseModel):
@@ -43,18 +39,18 @@ class UpdateTodoDto(BaseModel):
     priority: str | None = None
     completed: bool | None = None
 
-    @field_validator('title')
+    @field_validator("title")
     def validate_title(cls, v: str) -> str:
         """Validate title field."""
         if v is not None and not v.strip():
-            raise ValueError('Title cannot be empty or whitespace')
+            raise ValueError("Title cannot be empty or whitespace")
         return v.strip() if v else v
 
-    @field_validator('priority')
+    @field_validator("priority")
     def validate_priority(cls, v: str) -> str:
         """Validate priority field."""
         if v is not None and v not in [p.value for p in Priority]:
-            raise ValueError(f'Priority must be one of: {[p.value for p in Priority]}')
+            raise ValueError(f"Priority must be one of: {[p.value for p in Priority]}")
         return v
 
 
@@ -70,7 +66,7 @@ class TodoResponseDto(BaseModel):
     updated_at: datetime | None
 
     @classmethod
-    def from_todo(cls, todo: Todo) -> 'TodoResponseDto':
+    def from_todo(cls, todo: Todo) -> "TodoResponseDto":
         """Create DTO from domain entity."""
         return cls(
             id=todo.id,
@@ -79,7 +75,7 @@ class TodoResponseDto(BaseModel):
             completed=todo.completed,
             priority=todo.priority.value,
             created_at=todo.created_at,
-            updated_at=todo.updated_at
+            updated_at=todo.updated_at,
         )
 
 
@@ -92,7 +88,7 @@ class TodoListDto(BaseModel):
     pending_count: int
 
     @classmethod
-    def from_todos(cls, todos: list[Todo]) -> 'TodoListDto':
+    def from_todos(cls, todos: list[Todo]) -> "TodoListDto":
         """Create DTO from list of domain entities."""
         todo_dtos = [TodoResponseDto.from_todo(todo) for todo in todos]
         completed_count = sum(1 for todo in todos if todo.completed)
@@ -101,5 +97,5 @@ class TodoListDto(BaseModel):
             todos=todo_dtos,
             total_count=len(todos),
             completed_count=completed_count,
-            pending_count=len(todos) - completed_count
+            pending_count=len(todos) - completed_count,
         )

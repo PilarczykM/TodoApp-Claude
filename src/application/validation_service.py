@@ -35,6 +35,6 @@ class ValidationService:
             raise TodoValidationError("Todo ID cannot be empty")
 
         # UUID format validation
-        uuid_pattern = r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+        uuid_pattern = r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         if not re.match(uuid_pattern, todo_id.strip()):
             raise TodoValidationError("Invalid todo ID format")
