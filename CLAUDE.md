@@ -13,6 +13,7 @@
     <principle>Clean Code: Write code that is readable and maintainable</principle>
     <principle>KISS: Prefer simplicity over unnecessary complexity</principle>
     <principle>YAGNI: Don’t implement features until they are actually needed</principle>
+    <principle>NEVER USE RELATIVE IMPORTS</principle>
     <architecture>Domain-Driven Design (DDD)</architecture>
     <modules>
       <module>domain</module>

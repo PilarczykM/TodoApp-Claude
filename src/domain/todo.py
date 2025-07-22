@@ -3,8 +3,8 @@ from uuid import uuid4
 
 from pydantic import BaseModel, Field, field_validator
 
-from .exceptions import TodoValidationError
-from .priority import Priority
+from src.domain.exceptions import TodoValidationError
+from src.domain.priority import Priority
 
 
 class Todo(BaseModel):

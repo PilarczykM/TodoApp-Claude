@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 
-from .todo import Todo
+from src.domain.todo import Todo
 
 
 class TodoRepository(ABC):
