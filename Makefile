@@ -22,6 +22,6 @@ typecheck:
 	uv run mypy src
 
 format:
-	uv run ruff check . --fix
+	uv run ruff format .
 
 all: format lint test

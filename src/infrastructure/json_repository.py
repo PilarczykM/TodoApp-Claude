@@ -80,7 +80,7 @@ class JsonTodoRepository(TodoRepository):
             return {}
 
         try:
-            content = self.file_path.read_text(encoding='utf-8')
+            content = self.file_path.read_text(encoding="utf-8")
             if not content.strip():
                 return {}
             result = json.loads(content)
@@ -131,4 +131,4 @@ class JsonTodoRepository(TodoRepository):
         """Ensure the data directory and file exist."""
         FileHandler.ensure_data_directory(self.file_path.parent)
         if not self.file_path.exists():
-            self.file_path.write_text('{}', encoding='utf-8')
+            self.file_path.write_text("{}", encoding="utf-8")

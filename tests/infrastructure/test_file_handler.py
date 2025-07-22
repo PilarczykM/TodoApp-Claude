@@ -21,7 +21,7 @@ class TestFileHandler:
 
     def test_backup_file(self):
         """Test file backup creation."""
-        with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+        with tempfile.NamedTemporaryFile(mode="w", delete=False) as f:
             f.write("test content")
             temp_file = Path(f.name)
 
@@ -59,7 +59,7 @@ class TestFileHandler:
 
     def test_file_exists_and_readable(self):
         """Test file existence and readability check."""
-        with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+        with tempfile.NamedTemporaryFile(mode="w", delete=False) as f:
             f.write("test content")
             temp_file = Path(f.name)
 

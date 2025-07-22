@@ -7,8 +7,6 @@ class TodoDomainError(Exception):
     pass
 
 
-
-
 class TodoValidationError(TodoDomainError):
     """Raised when todo validation fails."""
 
@@ -27,5 +25,3 @@ class TodoNotFoundError(RepositoryError):
     def __init__(self, todo_id: str):
         super().__init__(f"Todo with ID '{todo_id}' not found")
         self.todo_id = todo_id
-
-
