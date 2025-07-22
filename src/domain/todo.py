@@ -3,6 +3,7 @@ from uuid import uuid4
 
 from pydantic import BaseModel, Field, field_validator
 
+from .exceptions import TodoValidationError
 from .priority import Priority
 
 
@@ -10,7 +11,7 @@ class Todo(BaseModel):
     """Todo domain entity representing a task."""
 
     id: str = Field(default_factory=lambda: str(uuid4()))
-    title: str = Field(min_length=1, max_length=200)
+    title: str = Field(max_length=200)
     description: str | None = Field(None, max_length=1000)
     completed: bool = False
     priority: Priority = Priority.MEDIUM
@@ -22,7 +23,7 @@ class Todo(BaseModel):
     def validate_title(cls, v: str) -> str:
         """Validate and clean the title field."""
         if not v.strip():
-            raise ValueError('Title cannot be empty or whitespace')
+            raise TodoValidationError('Title cannot be empty or whitespace')
         return v.strip()
 
     def mark_completed(self) -> None:

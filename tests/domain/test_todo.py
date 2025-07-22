@@ -2,6 +2,7 @@
 import pytest
 from pydantic import ValidationError
 
+from src.domain.exceptions import TodoValidationError
 from src.domain.priority import Priority
 from src.domain.todo import Todo
 
@@ -27,5 +28,5 @@ class TestTodo:
         assert todo.updated_at is not None
 
     def test_todo_validation(self):
-        with pytest.raises(ValidationError):
+        with pytest.raises(TodoValidationError):
             Todo(title="")  # Empty title should fail
