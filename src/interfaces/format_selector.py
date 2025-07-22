@@ -1,5 +1,6 @@
 from typing import Literal
-from .console_utils import ConsoleUtils
+
+from src.interfaces.console_utils import ConsoleUtils
 
 StorageFormat = Literal["json", "xml"]
 

@@ -1,14 +1,14 @@
 """Interface layer - User interfaces and application entry points."""
 
-from .console_interface import ConsoleInterface
-from .console_utils import ConsoleUtils
-from .format_selector import FormatSelector
-from .main import main, create_app_components
+from src.interfaces.console_interface import ConsoleInterface
+from src.interfaces.console_utils import ConsoleUtils
+from src.interfaces.format_selector import FormatSelector
+from src.interfaces.main import create_app_components, main
 
 __all__ = [
-    "ConsoleInterface", 
+    "ConsoleInterface",
     "ConsoleUtils",
     "FormatSelector",
-    "main",
     "create_app_components",
+    "main",
 ]

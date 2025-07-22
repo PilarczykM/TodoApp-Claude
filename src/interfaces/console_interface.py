@@ -1,8 +1,8 @@
-from typing import Optional
 
-from src.application import TodoService, CreateTodoDto, UpdateTodoDto
-from src.domain import TodoNotFoundError, TodoValidationError, RepositoryError, Priority
-from .console_utils import ConsoleUtils
+from src.application import CreateTodoDto, TodoService, UpdateTodoDto
+from src.domain import Priority, RepositoryError, TodoNotFoundError, TodoValidationError
+
+from src.interfaces.console_utils import ConsoleUtils
 
 
 class ConsoleInterface:
@@ -99,8 +99,8 @@ class ConsoleInterface:
                 ConsoleUtils.display_error("Title is required")
                 return False
 
-            description = ConsoleUtils.get_user_input("Enter description (optional)")
-            description = description if description else None
+            description_input = ConsoleUtils.get_user_input("Enter description (optional)")
+            description: str | None = description_input if description_input else None
 
             priority = ConsoleUtils.get_user_choice("Enter priority (low/medium/high)", ["low", "medium", "high"])
 
@@ -211,7 +211,7 @@ class ConsoleInterface:
             ConsoleUtils.display_error(f"Failed to update todo: {e}")
             return False
 
-    def _select_todo(self, action: str) -> Optional[str]:
+    def _select_todo(self, action: str) -> str | None:
         """Allow user to select a todo by showing list and getting ID."""
         try:
             todo_list = self._service.get_all_todos()

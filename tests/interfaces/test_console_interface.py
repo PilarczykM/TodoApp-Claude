@@ -1,12 +1,12 @@
-from unittest.mock import Mock, patch
-from io import StringIO
 from datetime import datetime
+from io import StringIO
+from unittest.mock import Mock, patch
 
 import pytest
 
-from src.interfaces.console_interface import ConsoleInterface
 from src.application import TodoService
-from src.application.dto import TodoResponseDto, TodoListDto
+from src.application.dto import TodoListDto, TodoResponseDto
+from src.interfaces.console_interface import ConsoleInterface
 
 
 @pytest.fixture

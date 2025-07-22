@@ -1,7 +1,5 @@
-from unittest.mock import patch
 from io import StringIO
-
-import pytest
+from unittest.mock import patch
 
 from src.interfaces.format_selector import FormatSelector
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Console Todo List Application
+"""Console Todo List Application
 
 A clean architecture implementation with CRUD operations
 and support for both JSON and XML storage formats.

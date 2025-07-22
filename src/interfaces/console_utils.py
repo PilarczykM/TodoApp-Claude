@@ -1,7 +1,5 @@
-from typing import List, Optional
-from datetime import datetime
 
-from src.application.dto import TodoResponseDto, TodoListDto
+from src.application.dto import TodoListDto, TodoResponseDto
 
 
 class ConsoleUtils:
@@ -15,7 +13,7 @@ class ConsoleUtils:
         print("=" * width)
 
     @staticmethod
-    def display_menu(title: str, options: List[str]) -> None:
+    def display_menu(title: str, options: list[str]) -> None:
         """Display a menu with numbered options."""
         print(f"\n{title}")
         print("-" * len(title))
@@ -72,7 +70,7 @@ class ConsoleUtils:
         print("-" * 40)
 
     @staticmethod
-    def get_user_input(prompt: str, default: Optional[str] = None) -> str:
+    def get_user_input(prompt: str, default: str | None = None) -> str:
         """Get user input with optional default value."""
         if default:
             prompt = f"{prompt} (default: {default}): "
@@ -83,7 +81,7 @@ class ConsoleUtils:
         return user_input if user_input else (default or "")
 
     @staticmethod
-    def get_user_choice(prompt: str, valid_choices: List[str]) -> str:
+    def get_user_choice(prompt: str, valid_choices: list[str]) -> str:
         """Get user choice from a list of valid options."""
         while True:
             choice = ConsoleUtils.get_user_input(prompt).lower()

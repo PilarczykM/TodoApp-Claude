@@ -1,12 +1,9 @@
-from io import StringIO
-import sys
-from unittest.mock import patch
 from datetime import datetime
+from io import StringIO
+from unittest.mock import patch
 
-import pytest
-
-from src.interfaces.console_utils import ConsoleUtils
 from src.application.dto import TodoResponseDto
+from src.interfaces.console_utils import ConsoleUtils
 
 
 class TestConsoleUtils:
