@@ -6,6 +6,7 @@ from src.application.dto import (
     UpdateTodoDto,
 )
 from src.application.todo_service import TodoService
+from src.application.validation_service import ValidationService
 
 __all__ = [
     "AppConfig",
@@ -14,4 +15,5 @@ __all__ = [
     "TodoResponseDto",
     "TodoService",
     "UpdateTodoDto",
+    "ValidationService",
 ]
