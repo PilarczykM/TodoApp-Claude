@@ -8,6 +8,9 @@ dependencies = [
     "pydantic>=2.0.0",
 ]
 
+[project.scripts]
+todo-app = "src.todo_app:main"
+
 [dependency-groups]
 dev = [
     "mypy>=1.17.0",
