@@ -4,7 +4,6 @@ from .exceptions import (
     RepositoryError,
     TodoDomainError,
     TodoNotFoundError,
-    TodoValidationError,
 )
 from .priority import Priority
 from .repository import TodoRepository
@@ -17,5 +16,4 @@ __all__ = [
     "TodoDomainError",
     "TodoNotFoundError",
     "TodoRepository",
-    "TodoValidationError",
 ]

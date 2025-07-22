@@ -3,7 +3,6 @@ from src.domain.exceptions import (
     RepositoryError,
     TodoDomainError,
     TodoNotFoundError,
-    TodoValidationError,
 )
 
 
@@ -17,12 +16,7 @@ class TestDomainExceptions:
         exc = RepositoryError("Connection failed")
         assert str(exc) == "Repository operation failed: Connection failed"
 
-    def test_validation_error(self):
-        exc = TodoValidationError("Title is required")
-        assert "Title is required" in str(exc)
-
     def test_exception_hierarchy(self):
         # Test that all exceptions inherit from TodoDomainError
         assert issubclass(TodoNotFoundError, TodoDomainError)
         assert issubclass(RepositoryError, TodoDomainError)
-        assert issubclass(TodoValidationError, TodoDomainError)

@@ -22,7 +22,3 @@ class RepositoryError(TodoDomainError):
         super().__init__(f"Repository operation failed: {message}")
 
 
-class TodoValidationError(TodoDomainError):
-    """Raised when todo validation fails."""
-
-    pass
