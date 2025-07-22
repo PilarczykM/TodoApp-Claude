@@ -32,7 +32,10 @@ def main():
 
     # Override with specific sound if provided as argument
     if len(sys.argv) > 1:
-        audio_file = f"{sys.argv[1]}.mp3"
+        if not arg.endswith((".mp3", ".wav")):
+            audio_file = f"{arg}.mp3"
+        else:
+            audio_file = arg
 
     # Full path to audio file
     audio_path = audio_dir / audio_file
