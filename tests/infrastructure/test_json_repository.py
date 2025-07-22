@@ -1,11 +1,12 @@
 """Tests for JSON repository implementation."""
 
 import tempfile
+import unittest.mock
 from pathlib import Path
 
 import pytest
 
-from src.domain.exceptions import TodoNotFoundError
+from src.domain.exceptions import RepositoryError, TodoNotFoundError
 from src.domain.priority import Priority
 from src.domain.todo import Todo
 from src.infrastructure.json_repository import JsonTodoRepository
@@ -127,3 +128,98 @@ class TestJsonTodoRepository:
             repo.save(todo2)
 
             assert repo.count() == 2
+
+    def test_json_repository_save_error_handling(self):
+        """Test error handling in save method."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo = JsonTodoRepository(Path(temp_dir) / "todos.json")
+            todo = Todo(title="Test Task")
+
+            # Mock _save_all_todos to raise exception
+            with unittest.mock.patch.object(repo, "_save_all_todos", side_effect=Exception("Save error")):
+                with pytest.raises(RepositoryError, match="Failed to save todo"):
+                    repo.save(todo)
+
+    def test_json_repository_find_by_id_error_handling(self):
+        """Test error handling in find_by_id method."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo = JsonTodoRepository(Path(temp_dir) / "todos.json")
+
+            # Mock _load_all_todos to raise exception
+            with unittest.mock.patch.object(repo, "_load_all_todos", side_effect=Exception("Load error")):
+                with pytest.raises(RepositoryError, match="Failed to find todo"):
+                    repo.find_by_id("test-id")
+
+    def test_json_repository_find_all_error_handling(self):
+        """Test error handling in find_all method."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo = JsonTodoRepository(Path(temp_dir) / "todos.json")
+
+            # Mock _load_all_todos to raise exception
+            with unittest.mock.patch.object(repo, "_load_all_todos", side_effect=Exception("Load error")):
+                with pytest.raises(RepositoryError, match="Failed to load todos"):
+                    repo.find_all()
+
+    def test_json_repository_delete_error_handling(self):
+        """Test error handling in delete method."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo = JsonTodoRepository(Path(temp_dir) / "todos.json")
+
+            # Mock _load_all_todos to raise exception
+            with unittest.mock.patch.object(repo, "_load_all_todos", side_effect=Exception("Load error")):
+                with pytest.raises(RepositoryError, match="Failed to delete todo"):
+                    repo.delete("test-id")
+
+    def test_json_repository_load_empty_file(self):
+        """Test loading from empty file."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            file_path = Path(temp_dir) / "empty.json"
+            file_path.write_text("", encoding="utf-8")
+
+            repo = JsonTodoRepository(file_path)
+            todos = repo._load_all_todos()
+            assert todos == {}
+
+    def test_json_repository_load_invalid_json(self):
+        """Test loading from file with invalid JSON format."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            file_path = Path(temp_dir) / "invalid.json"
+            file_path.write_text("not valid json", encoding="utf-8")
+
+            repo = JsonTodoRepository(file_path)
+            with pytest.raises(RepositoryError, match="Invalid JSON format"):
+                repo._load_all_todos()
+
+    def test_json_repository_load_non_dict_json(self):
+        """Test loading from file with JSON that's not a dict."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            file_path = Path(temp_dir) / "list.json"
+            file_path.write_text('["not", "a", "dict"]', encoding="utf-8")
+
+            repo = JsonTodoRepository(file_path)
+            with pytest.raises(RepositoryError, match="Invalid JSON format: expected object"):
+                repo._load_all_todos()
+
+    def test_json_repository_save_error_in_write(self):
+        """Test error handling when file write fails."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo = JsonTodoRepository(Path(temp_dir) / "todos.json")
+
+            # Mock FileHandler.safe_write to raise exception
+            with unittest.mock.patch(
+                "src.infrastructure.json_repository.FileHandler.safe_write", side_effect=Exception("Write error")
+            ):
+                with pytest.raises(RepositoryError, match="Failed to write JSON file"):
+                    repo._save_all_todos({})
+
+    def test_json_repository_load_nonexistent_file(self):
+        """Test loading from non-existent file returns empty dict."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            file_path = Path(temp_dir) / "nonexistent.json"
+            repo = JsonTodoRepository(file_path)
+
+            # Remove the file that was created during initialization
+            file_path.unlink()
+
+            todos = repo._load_all_todos()
+            assert todos == {}
