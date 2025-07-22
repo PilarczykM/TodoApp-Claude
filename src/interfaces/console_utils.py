@@ -123,7 +123,7 @@ class ConsoleUtils:
     @staticmethod
     def display_info(message: str) -> None:
         """Display an info message."""
-        print(f"\nℹ️  {message}\n")
+        print(f"\nℹ️  {message}\n")  # noqa: RUF001
 
     @staticmethod
     def clear_screen() -> None:

@@ -32,7 +32,7 @@ def create_app_components(data_dir: Path) -> tuple[TodoService, AppConfig]:
 
 
 def main() -> None:
-    """Main application entry point."""
+    """Run main application entry point."""
     try:
         # Set up data directory
         data_dir = Path.home() / ".todoapp"

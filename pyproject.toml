@@ -55,6 +55,7 @@ ignore = [
     "D104", # Missing docstring in public package
     "D107", # Missing docstring in __init__
     "TRY003", # Avoid specifying long messages outside the exception class
+    "TRY300",
 ]
 
 [tool.ruff.lint.flake8-tidy-imports]

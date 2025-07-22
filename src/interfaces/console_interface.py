@@ -11,7 +11,7 @@ class ConsoleInterface:
         self._running = True
 
     def run(self) -> None:
-        """Main application loop."""
+        """Run main application loop."""
         ConsoleUtils.display_header("Todo List Application")
         ConsoleUtils.display_info("Welcome! Manage your tasks efficiently.")
 
@@ -80,12 +80,11 @@ class ConsoleInterface:
                 ConsoleUtils.display_todos(pending_todos)
             elif filter_choice == 4:
                 self._show_todos_by_priority()
-
-            return True
-
         except RepositoryError as e:
             ConsoleUtils.display_error(f"Failed to load todos: {e}")
             return False
+        else:
+            return True
 
     def _create_todo(self) -> bool:
         """Create a new todo."""
@@ -106,15 +105,14 @@ class ConsoleInterface:
 
             todo = self._service.create_todo(dto)
             ConsoleUtils.display_success(f"Task '{todo.title}' created successfully!")
-
-            return True
-
         except TodoValidationError as e:
             ConsoleUtils.display_error(f"Validation error: {e}")
             return False
         except RepositoryError as e:
             ConsoleUtils.display_error(f"Failed to create todo: {e}")
             return False
+        else:
+            return True
 
     def _update_todo(self) -> bool:
         """Update an existing todo."""
@@ -134,7 +132,7 @@ class ConsoleInterface:
             new_description = ConsoleUtils.get_user_input("New description")
             new_priority = ConsoleUtils.get_user_input("New priority (low/medium/high)")
 
-            dto = UpdateTodoDto()
+            dto = UpdateTodoDto(title=None, description=None, priority=None, completed=None)
 
             if new_title != current_todo.title:
                 dto.title = new_title
@@ -145,9 +143,6 @@ class ConsoleInterface:
 
             updated_todo = self._service.update_todo(todo_id, dto)
             ConsoleUtils.display_success(f"Task '{updated_todo.title}' updated successfully!")
-
-            return True
-
         except TodoNotFoundError:
             ConsoleUtils.display_error("Todo not found")
             return False
@@ -157,6 +152,8 @@ class ConsoleInterface:
         except RepositoryError as e:
             ConsoleUtils.display_error(f"Failed to update todo: {e}")
             return False
+        else:
+            return True
 
     def _delete_todo(self) -> bool:
         """Delete a todo."""
@@ -180,14 +177,14 @@ class ConsoleInterface:
                 return success
 
             ConsoleUtils.display_info("Delete cancelled")
-            return True
-
         except TodoNotFoundError:
             ConsoleUtils.display_error("Todo not found")
             return False
         except RepositoryError as e:
             ConsoleUtils.display_error(f"Failed to delete todo: {e}")
             return False
+        else:
+            return True
 
     def _toggle_completion(self) -> bool:
         """Toggle completion status of a todo."""
@@ -200,14 +197,14 @@ class ConsoleInterface:
             status = "completed" if updated_todo.completed else "pending"
 
             ConsoleUtils.display_success(f"Task '{updated_todo.title}' marked as {status}!")
-            return True
-
         except TodoNotFoundError:
             ConsoleUtils.display_error("Todo not found")
             return False
         except RepositoryError as e:
             ConsoleUtils.display_error(f"Failed to update todo: {e}")
             return False
+        else:
+            return True
 
     def _select_todo(self, action: str) -> str | None:
         """Allow user to select a todo by showing list and getting ID."""
@@ -231,7 +228,6 @@ class ConsoleInterface:
 
             ConsoleUtils.display_error("Todo not found with that ID")
             return None
-
         except RepositoryError as e:
             ConsoleUtils.display_error(f"Failed to load todos: {e}")
             return None

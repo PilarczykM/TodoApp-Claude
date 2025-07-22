@@ -2,7 +2,7 @@ from datetime import datetime
 from io import StringIO
 from unittest.mock import patch
 
-from src.application.dto import TodoResponseDto, TodoListDto
+from src.application.dto import TodoListDto, TodoResponseDto
 from src.interfaces.console_utils import ConsoleUtils
 
 
@@ -124,7 +124,7 @@ class TestConsoleUtils:
             ConsoleUtils.display_info("Info message")
 
         result = output.getvalue()
-        assert "ℹ️  Info message" in result
+        assert "ℹ️  Info message" in result  # noqa: RUF001
 
     def test_display_todos_empty(self):
         empty_list = TodoListDto(todos=[], total_count=0, pending_count=0, completed_count=0)
