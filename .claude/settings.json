@@ -23,7 +23,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "uv run .claude/hooks/play_audio.py"
+            "command": "uv run .claude/hooks/play_audio.py .claude/audio/mixkit-bell-notification-933.wav"
           }
         ]
       }
