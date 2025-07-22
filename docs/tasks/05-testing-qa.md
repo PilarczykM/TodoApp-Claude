@@ -1129,3 +1129,5 @@ The project demonstrates mastery of:
 - Repository and Strategy patterns
 - Comprehensive testing strategies
 - Quality assurance practices
+
+Refer to @docs/PRD.md only if additional product context is needed — it contains the full product overview.

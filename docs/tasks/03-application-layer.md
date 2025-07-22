@@ -648,3 +648,5 @@ __all__ = [
 
 ## Next Phase
 Once Phase 3 is complete, do not proceed to **Phase 4: Interface Layer** to implement the console user interface and application entry point.
+
+Refer to @docs/PRD.md only if additional product context is needed — it contains the full product overview.

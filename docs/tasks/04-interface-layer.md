@@ -901,3 +901,5 @@ __all__ = [
 
 ## Next Phase
 Once Phase 4 is complete, do not proceed to **Phase 5: Testing & Quality Assurance** to ensure comprehensive test coverage and code quality standards are met.
+
+Refer to @docs/PRD.md only if additional product context is needed — it contains the full product overview.

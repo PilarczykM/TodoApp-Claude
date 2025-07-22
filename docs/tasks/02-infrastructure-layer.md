@@ -706,3 +706,5 @@ __all__ = [
 
 ## Next Phase
 Once Phase 2 is complete, do not proceed to **Phase 3: Application Layer** to implement business logic and use cases that coordinate between domain and infrastructure layers.
+
+Refer to @docs/PRD.md only if additional product context is needed — it contains the full product overview.

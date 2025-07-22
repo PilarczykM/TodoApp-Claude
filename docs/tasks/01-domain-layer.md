@@ -363,3 +363,5 @@ __all__ = [
 
 ## Next Phase
 Once Phase 1 is complete, do not proceed to **Phase 2: Infrastructure Layer** to implement concrete repository classes for JSON and XML persistence.
+
+Refer to @docs/PRD.md only if additional product context is needed — it contains the full product overview.
