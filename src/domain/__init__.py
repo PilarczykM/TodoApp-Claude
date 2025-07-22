@@ -2,6 +2,7 @@
 
 from src.domain.exceptions import (
     TodoDomainError,
+    TodoNotFoundError,
     TodoValidationError,
 )
 from src.domain.priority import Priority
@@ -12,6 +13,7 @@ __all__ = [
     "Priority",
     "Todo",
     "TodoDomainError",
+    "TodoNotFoundError",
     "TodoRepository",
     "TodoValidationError",
 ]
