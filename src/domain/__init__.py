@@ -1,21 +1,21 @@
 """Domain layer - Core business entities and rules."""
 
-from .todo import Todo
-from .priority import Priority
-from .repository import TodoRepository
 from .exceptions import (
+    RepositoryError,
     TodoDomainError,
     TodoNotFoundError,
-    RepositoryError,
     TodoValidationError,
 )
+from .priority import Priority
+from .repository import TodoRepository
+from .todo import Todo
 
 __all__ = [
+    "Priority",
+    "RepositoryError",
     "Todo",
-    "Priority", 
-    "TodoRepository",
     "TodoDomainError",
     "TodoNotFoundError",
-    "RepositoryError", 
+    "TodoRepository",
     "TodoValidationError",
 ]

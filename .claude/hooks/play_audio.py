@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""
-Claude Code Stop Hook - Task Completion Announcer
+"""Claude Code Stop Hook - Task Completion Announcer
 Plays pre-generated audio clips when tasks are completed
 """
 
-import sys
 import subprocess
+import sys
 from pathlib import Path
 
 
