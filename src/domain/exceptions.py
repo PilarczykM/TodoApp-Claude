@@ -11,6 +11,7 @@ class TodoDomainError(Exception):
 
 class TodoValidationError(TodoDomainError):
     """Raised when todo validation fails."""
+
     pass
 
 

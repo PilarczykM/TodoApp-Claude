@@ -1,6 +1,5 @@
 
 import pytest
-from pydantic import ValidationError
 
 from src.domain.exceptions import TodoValidationError
 from src.domain.priority import Priority
