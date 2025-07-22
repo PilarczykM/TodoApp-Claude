@@ -148,32 +148,36 @@ class XmlTodoRepository(TodoRepository):
         todo_id = element.get("id")
         if todo_id is None:
             raise RepositoryError("Todo element missing required 'id' attribute")
-            
+
         title_elem = element.find("title")
         if title_elem is None or title_elem.text is None:
             raise RepositoryError("Todo element missing required 'title' field")
         title = title_elem.text
-        
+
         description_elem = element.find("description")
         description = description_elem.text if description_elem is not None else None
-        
+
         completed_elem = element.find("completed")
         if completed_elem is None or completed_elem.text is None:
             raise RepositoryError("Todo element missing required 'completed' field")
         completed = completed_elem.text.lower() == "true"
-        
+
         priority_elem = element.find("priority")
         if priority_elem is None or priority_elem.text is None:
             raise RepositoryError("Todo element missing required 'priority' field")
         priority = Priority(priority_elem.text)
-        
+
         created_elem = element.find("created_at")
         if created_elem is None or created_elem.text is None:
             raise RepositoryError("Todo element missing required 'created_at' field")
         created_at = datetime.fromisoformat(created_elem.text)
-        
+
         updated_elem = element.find("updated_at")
-        updated_at = datetime.fromisoformat(updated_elem.text) if updated_elem is not None and updated_elem.text is not None else None
+        updated_at = (
+            datetime.fromisoformat(updated_elem.text)
+            if updated_elem is not None and updated_elem.text is not None
+            else None
+        )
 
         return Todo(
             id=todo_id,
