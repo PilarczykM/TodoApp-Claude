@@ -18,12 +18,12 @@ class Todo(BaseModel):
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime | None = None
 
-    @field_validator('title')
+    @field_validator("title")
     @classmethod
     def validate_title(cls, v: str) -> str:
         """Validate and clean the title field."""
         if not v.strip():
-            raise TodoValidationError('Title cannot be empty or whitespace')
+            raise TodoValidationError("Title cannot be empty or whitespace")
         return v.strip()
 
     def mark_completed(self) -> None:

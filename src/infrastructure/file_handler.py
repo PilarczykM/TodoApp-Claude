@@ -28,14 +28,14 @@ class FileHandler:
     @staticmethod
     def safe_write(file_path: Path, content: str) -> None:
         """Safely write content to file with atomic operation."""
-        temp_path = file_path.with_suffix(file_path.suffix + '.tmp')
+        temp_path = file_path.with_suffix(file_path.suffix + ".tmp")
 
         try:
             # Write to temporary file first
-            temp_path.write_text(content, encoding='utf-8')
+            temp_path.write_text(content, encoding="utf-8")
 
             # Atomic move to final location
-            if os.name == 'nt':  # Windows
+            if os.name == "nt":  # Windows
                 if file_path.exists():
                     file_path.unlink()
             temp_path.replace(file_path)
