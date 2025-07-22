@@ -11,34 +11,34 @@ class TodoRepository(ABC):
     @abstractmethod
     def save(self, todo: Todo) -> None:
         """Save a todo item to storage."""
-        pass
+        pass  # pragma: no cover
 
     @abstractmethod
     def find_by_id(self, todo_id: str) -> Todo | None:
         """Find a todo item by its ID."""
-        pass
+        pass  # pragma: no cover
 
     @abstractmethod
     def find_all(self) -> list[Todo]:
         """Retrieve all todo items."""
-        pass
+        pass  # pragma: no cover
 
     @abstractmethod
     def delete(self, todo_id: str) -> bool:
         """Delete a todo item by ID. Returns True if deleted."""
-        pass
+        pass  # pragma: no cover
 
     @abstractmethod
     def exists(self, todo_id: str) -> bool:
         """Check if a todo item exists."""
-        pass
+        pass  # pragma: no cover
 
     @abstractmethod
     def update(self, todo: Todo) -> None:
         """Update an existing todo item."""
-        pass
+        pass  # pragma: no cover
 
     @abstractmethod
     def count(self) -> int:
         """Return the total number of todo items."""
-        pass
+        pass  # pragma: no cover

@@ -299,3 +299,15 @@ class TestXmlTodoRepository:
 
             with pytest.raises(RepositoryError, match="Todo element missing required 'created_at' field"):
                 repo._xml_element_to_todo(element)
+
+    def test_xml_repository_load_xml_root_nonexistent_file_direct(self):
+        """Test _load_xml_root directly with truly non-existent file."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            file_path = Path(temp_dir) / "truly_nonexistent.xml"
+            repo = XmlTodoRepository.__new__(XmlTodoRepository)  # Create without calling __init__
+            repo.file_path = file_path  # Set the file path directly
+
+            # Now call _load_xml_root which should hit the non-existent file branch
+            root = repo._load_xml_root()
+            assert root.tag == "todos"
+            assert len(list(root)) == 0  # Should be empty
