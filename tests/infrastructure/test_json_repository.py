@@ -136,7 +136,7 @@ class TestJsonTodoRepository:
             todo = Todo(title="Test Task")
 
             # Mock _save_all_todos to raise exception
-            with unittest.mock.patch.object(repo, '_save_all_todos', side_effect=Exception("Save error")):
+            with unittest.mock.patch.object(repo, "_save_all_todos", side_effect=Exception("Save error")):
                 with pytest.raises(RepositoryError, match="Failed to save todo"):
                     repo.save(todo)
 
@@ -146,7 +146,7 @@ class TestJsonTodoRepository:
             repo = JsonTodoRepository(Path(temp_dir) / "todos.json")
 
             # Mock _load_all_todos to raise exception
-            with unittest.mock.patch.object(repo, '_load_all_todos', side_effect=Exception("Load error")):
+            with unittest.mock.patch.object(repo, "_load_all_todos", side_effect=Exception("Load error")):
                 with pytest.raises(RepositoryError, match="Failed to find todo"):
                     repo.find_by_id("test-id")
 
@@ -156,7 +156,7 @@ class TestJsonTodoRepository:
             repo = JsonTodoRepository(Path(temp_dir) / "todos.json")
 
             # Mock _load_all_todos to raise exception
-            with unittest.mock.patch.object(repo, '_load_all_todos', side_effect=Exception("Load error")):
+            with unittest.mock.patch.object(repo, "_load_all_todos", side_effect=Exception("Load error")):
                 with pytest.raises(RepositoryError, match="Failed to load todos"):
                     repo.find_all()
 
@@ -166,7 +166,7 @@ class TestJsonTodoRepository:
             repo = JsonTodoRepository(Path(temp_dir) / "todos.json")
 
             # Mock _load_all_todos to raise exception
-            with unittest.mock.patch.object(repo, '_load_all_todos', side_effect=Exception("Load error")):
+            with unittest.mock.patch.object(repo, "_load_all_todos", side_effect=Exception("Load error")):
                 with pytest.raises(RepositoryError, match="Failed to delete todo"):
                     repo.delete("test-id")
 
@@ -174,7 +174,7 @@ class TestJsonTodoRepository:
         """Test loading from empty file."""
         with tempfile.TemporaryDirectory() as temp_dir:
             file_path = Path(temp_dir) / "empty.json"
-            file_path.write_text("", encoding='utf-8')
+            file_path.write_text("", encoding="utf-8")
 
             repo = JsonTodoRepository(file_path)
             todos = repo._load_all_todos()
@@ -184,7 +184,7 @@ class TestJsonTodoRepository:
         """Test loading from file with invalid JSON format."""
         with tempfile.TemporaryDirectory() as temp_dir:
             file_path = Path(temp_dir) / "invalid.json"
-            file_path.write_text("not valid json", encoding='utf-8')
+            file_path.write_text("not valid json", encoding="utf-8")
 
             repo = JsonTodoRepository(file_path)
             with pytest.raises(RepositoryError, match="Invalid JSON format"):
@@ -194,7 +194,7 @@ class TestJsonTodoRepository:
         """Test loading from file with JSON that's not a dict."""
         with tempfile.TemporaryDirectory() as temp_dir:
             file_path = Path(temp_dir) / "list.json"
-            file_path.write_text('["not", "a", "dict"]', encoding='utf-8')
+            file_path.write_text('["not", "a", "dict"]', encoding="utf-8")
 
             repo = JsonTodoRepository(file_path)
             with pytest.raises(RepositoryError, match="Invalid JSON format: expected object"):
@@ -206,8 +206,9 @@ class TestJsonTodoRepository:
             repo = JsonTodoRepository(Path(temp_dir) / "todos.json")
 
             # Mock FileHandler.safe_write to raise exception
-            with unittest.mock.patch('src.infrastructure.json_repository.FileHandler.safe_write',
-                                   side_effect=Exception("Write error")):
+            with unittest.mock.patch(
+                "src.infrastructure.json_repository.FileHandler.safe_write", side_effect=Exception("Write error")
+            ):
                 with pytest.raises(RepositoryError, match="Failed to write JSON file"):
                     repo._save_all_todos({})
 

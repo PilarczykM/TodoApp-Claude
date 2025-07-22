@@ -79,10 +79,10 @@ class TestFileHandler:
 
         with tempfile.TemporaryDirectory() as temp_dir:
             file_path = Path(temp_dir) / "test.txt"
-            temp_path = file_path.with_suffix(file_path.suffix + '.tmp')
+            temp_path = file_path.with_suffix(file_path.suffix + ".tmp")
 
             # Mock temp_path.replace to raise exception
-            with unittest.mock.patch.object(Path, 'replace', side_effect=OSError("Test error")):
+            with unittest.mock.patch.object(Path, "replace", side_effect=OSError("Test error")):
                 with pytest.raises(OSError):
                     FileHandler.safe_write(file_path, "test content")
 
@@ -98,6 +98,6 @@ class TestFileHandler:
             file_path.write_text("existing content")
 
             # Mock os.name to simulate Windows
-            with unittest.mock.patch.object(os, 'name', 'nt'):
+            with unittest.mock.patch.object(os, "name", "nt"):
                 FileHandler.safe_write(file_path, "new content")
                 assert file_path.read_text() == "new content"
