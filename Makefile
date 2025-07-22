@@ -4,6 +4,7 @@ help:
 	@echo "Commands:"
 	@echo "  install    : Install dependencies"
 	@echo "  test       : Run tests"
+	@echo "  cov        : Run coverage"
 	@echo "  lint       : Run linter"
 	@echo "  typecheck  : Run typecheck"
 	@echo "  format     : Run formatter"
@@ -14,6 +15,9 @@ install:
 
 test:
 	uv run pytest
+
+cov:
+	uv run pytest --cov=src tests/ --cov-fail-under=90
 
 lint:
 	uv run ruff check .

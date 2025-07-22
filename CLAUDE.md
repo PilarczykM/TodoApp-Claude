@@ -1,8 +1,20 @@
-# Project guidance  
+# Project guidance
+
+## Tech Stack
+- Language: Python 3.12+
+- Framework: No
+- Database: No
+
+## Project Structure
+- `domain/`: Core business logic
+- `application/`: Use cases and services  
+- `infrastructure/`: External concerns
+- `interfaces/`: Controllers and adapters
 
 <project-guidelines>
   <commands>
     <command name="make test" purpose="testing">Run all unit tests with pytest</command>
+    <command name="make cov" purpose="coverage">Run test coverage analysis</command>
     <command name="make lint" purpose="linting">Show linting issues (e.g., flake8, ruff)</command>
     <command name="make format" purpose="formatting">Autofix formatting/lint issues (e.g. ruff)</command>
     <command name="make typecheck" purpose="type-checking">Run static type checking (e.g., mypy)</command>
@@ -35,8 +47,15 @@
     <step>Run <code>make lint</code> to check for lint violations</step>
     <step>Run <code>make typecheck</code> to perform static type analysis</step>
     <step>Run <code>make test</code> to execute all tests and verify correctness</step>
+    <step>Run <code>make cov</code> to execute tests coverage and verify that we are not below 90%</step>
     <step>Do all of the above before committing any code</step>
     <step>Commit frequently to keep changes atomic and traceable</step>
     <quality-target>Maintain test coverage above 90%</quality-target>
   </workflow>
+
+  <restrictions>
+    <restriction>Do not commit directly to main branch</restriction>
+    <restriction>Do not commit without checking code quality</restriction>
+    <restriction>Do not use relative imports</restriction>
+  </restrictions>
 </project-guidelines>
