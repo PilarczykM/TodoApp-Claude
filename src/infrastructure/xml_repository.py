@@ -116,7 +116,7 @@ class XmlTodoRepository(TodoRepository):
             self._indent_xml(root)
 
             # Write to temporary file then move atomically
-            xml_content = ET.tostring(root, encoding='unicode', xml_declaration=True)
+            xml_content = ET.tostring(root, encoding="unicode", xml_declaration=True)
             FileHandler.safe_write(self.file_path, xml_content)
 
         except Exception as e:

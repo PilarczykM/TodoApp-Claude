@@ -90,7 +90,6 @@ class TodoService:
             "completed_count": sum(1 for todo in all_todos if todo.completed),
             "pending_count": sum(1 for todo in all_todos if not todo.completed),
             "by_priority": {
-                priority.value: sum(1 for todo in all_todos if todo.priority == priority)
-                for priority in Priority
-            }
+                priority.value: sum(1 for todo in all_todos if todo.priority == priority) for priority in Priority
+            },
         }
