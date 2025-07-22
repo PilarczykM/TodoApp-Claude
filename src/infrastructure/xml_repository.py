@@ -43,7 +43,8 @@ class XmlTodoRepository(TodoRepository):
 
             if todo_element is not None:
                 return self._xml_element_to_todo(todo_element)
-            return None
+            else:
+                return None
         except Exception as e:
             raise RepositoryError(f"Failed to find todo: {e}")
 
@@ -53,10 +54,13 @@ class XmlTodoRepository(TodoRepository):
             root = self._load_xml_root()
             todos = []
 
-            for todo_element in root.findall(".//todo"):
-                todos.append(self._xml_element_to_todo(todo_element))
-
-            return todos
+            todo_elements = root.findall(".//todo")
+            if todo_elements:
+                for todo_element in todo_elements:
+                    todos.append(self._xml_element_to_todo(todo_element))
+                return todos
+            else:
+                return todos
         except Exception as e:
             raise RepositoryError(f"Failed to load todos: {e}")
 
@@ -70,7 +74,8 @@ class XmlTodoRepository(TodoRepository):
                 root.remove(todo_element)
                 self._save_xml_root(root)
                 return True
-            return False
+            else:
+                return False
         except Exception as e:
             raise RepositoryError(f"Failed to delete todo: {e}")
 

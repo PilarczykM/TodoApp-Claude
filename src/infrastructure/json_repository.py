@@ -33,7 +33,8 @@ class JsonTodoRepository(TodoRepository):
             todos = self._load_all_todos()
             if todo_id in todos:
                 return self._dict_to_todo(todos[todo_id])
-            return None
+            else:
+                return None
         except Exception as e:
             raise RepositoryError(f"Failed to find todo: {e}")
 
@@ -53,7 +54,8 @@ class JsonTodoRepository(TodoRepository):
                 del todos[todo_id]
                 self._save_all_todos(todos)
                 return True
-            return False
+            else:
+                return False
         except Exception as e:
             raise RepositoryError(f"Failed to delete todo: {e}")
 
@@ -84,7 +86,8 @@ class JsonTodoRepository(TodoRepository):
             result = json.loads(content)
             if not isinstance(result, dict):
                 raise RepositoryError("Invalid JSON format: expected object")
-            return result
+            else:
+                return result
         except json.JSONDecodeError as e:
             raise RepositoryError(f"Invalid JSON format: {e}")
 
