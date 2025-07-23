@@ -5,7 +5,7 @@ A clean architecture implementation with CRUD operations
 and support for both JSON and XML storage formats.
 """
 
-from src.interfaces.main import main as _main
+from src.interfaces import main as _main
 
 
 def main() -> None:
